@@ -1,0 +1,261 @@
+{
+  "format_version": "1.0",
+  "terraform_version": "1.5.0",
+  "planned_values": {
+    "root_module": {
+      "resources": [
+        {
+          "address": "aws_s3_bucket.app_bucket",
+          "mode": "managed",
+          "type": "aws_s3_bucket",
+          "name": "app_bucket",
+          "values": {
+            "bucket": "my-app-bucket-12345",
+            "acl": "private",
+            "versioning": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "address": "aws_security_group.web",
+          "mode": "managed",
+          "type": "aws_security_group",
+          "name": "web",
+          "values": {
+            "name": "web-sg",
+            "description": "Security group for web servers",
+            "ingress": [
+              {
+                "from_port": 80,
+                "to_port": 80,
+                "protocol": "tcp",
+                "cidr_blocks": ["0.0.0.0/0"],
+                "description": "Allow HTTP"
+              },
+              {
+                "from_port": 443,
+                "to_port": 443,
+                "protocol": "tcp",
+                "cidr_blocks": ["0.0.0.0/0"],
+                "description": "Allow HTTPS"
+              }
+            ],
+            "egress": [
+              {
+                "from_port": 0,
+                "to_port": 0,
+                "protocol": "-1",
+                "cidr_blocks": ["0.0.0.0/0"]
+              }
+            ]
+          }
+        },
+        {
+          "address": "aws_instance.web",
+          "mode": "managed",
+          "type": "aws_instance",
+          "name": "web",
+          "values": {
+            "ami": "ami-0c55b159cbfafe1f0",
+            "instance_type": "t2.micro",
+            "tags": {
+              "Name": "WebServer",
+              "Environment": "Production"
+            },
+            "security_groups": ["web-sg"],
+            "associate_public_ip_address": true
+          }
+        }
+      ]
+    }
+  },
+  "resource_changes": [
+    {
+      "address": "aws_s3_bucket.app_bucket",
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "app_bucket",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["no-op"],
+        "before": {
+          "bucket": "my-app-bucket-12345",
+          "acl": "private",
+          "versioning": {
+            "enabled": false
+          },
+          "server_side_encryption_configuration": null,
+          "tags": {
+            "Name": "AppBucket",
+            "Project": "MyApp"
+          }
+        },
+        "after": {
+          "bucket": "my-app-bucket-12345",
+          "acl": "private",
+          "versioning": {
+            "enabled": false
+          },
+          "server_side_encryption_configuration": null,
+          "tags": {
+            "Name": "AppBucket",
+            "Project": "MyApp"
+          }
+        },
+        "after_unknown": {}
+      }
+    },
+    {
+      "address": "aws_security_group.web",
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "web",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {
+          "name": "web-sg",
+          "description": "Security group for web servers",
+          "vpc_id": "vpc-12345678",
+          "ingress": [
+            {
+              "from_port": 80,
+              "to_port": 80,
+              "protocol": "tcp",
+              "cidr_blocks": ["0.0.0.0/0"],
+              "ipv6_cidr_blocks": [],
+              "prefix_list_ids": [],
+              "security_groups": [],
+              "self": false,
+              "description": "Allow HTTP"
+            },
+            {
+              "from_port": 443,
+              "to_port": 443,
+              "protocol": "tcp",
+              "cidr_blocks": ["0.0.0.0/0"],
+              "ipv6_cidr_blocks": [],
+              "prefix_list_ids": [],
+              "security_groups": [],
+              "self": false,
+              "description": "Allow HTTPS"
+            },
+            {
+              "from_port": 22,
+              "to_port": 22,
+              "protocol": "tcp",
+              "cidr_blocks": ["0.0.0.0/0"],
+              "ipv6_cidr_blocks": [],
+              "prefix_list_ids": [],
+              "security_groups": [],
+              "self": false,
+              "description": "Allow SSH"
+            }
+          ],
+          "egress": [
+            {
+              "from_port": 0,
+              "to_port": 0,
+              "protocol": "-1",
+              "cidr_blocks": ["0.0.0.0/0"],
+              "ipv6_cidr_blocks": [],
+              "prefix_list_ids": [],
+              "security_groups": [],
+              "self": false,
+              "description": ""
+            }
+          ]
+        },
+        "after": {
+          "name": "web-sg",
+          "description": "Security group for web servers",
+          "vpc_id": "vpc-12345678",
+          "ingress": [
+            {
+              "from_port": 80,
+              "to_port": 80,
+              "protocol": "tcp",
+              "cidr_blocks": ["0.0.0.0/0"],
+              "ipv6_cidr_blocks": [],
+              "prefix_list_ids": [],
+              "security_groups": [],
+              "self": false,
+              "description": "Allow HTTP"
+            },
+            {
+              "from_port": 443,
+              "to_port": 443,
+              "protocol": "tcp",
+              "cidr_blocks": ["0.0.0.0/0"],
+              "ipv6_cidr_blocks": [],
+              "prefix_list_ids": [],
+              "security_groups": [],
+              "self": false,
+              "description": "Allow HTTPS"
+            }
+          ],
+          "egress": [
+            {
+              "from_port": 0,
+              "to_port": 0,
+              "protocol": "-1",
+              "cidr_blocks": ["0.0.0.0/0"],
+              "ipv6_cidr_blocks": [],
+              "prefix_list_ids": [],
+              "security_groups": [],
+              "self": false,
+              "description": ""
+            }
+          ]
+        },
+        "after_unknown": {}
+      }
+    },
+    {
+      "address": "aws_instance.web",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "web",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": ["update"],
+        "before": {
+          "ami": "ami-0c55b159cbfafe1f0",
+          "instance_type": "t5.medium",
+          "availability_zone": "us-east-1a",
+          "tags": {
+            "Name": "WebServer",
+            "Environment": "Production"
+          },
+          "security_groups": ["web-sg"],
+          "associate_public_ip_address": true,
+          "monitoring": false,
+          "ebs_optimized": false
+        },
+        "after": {
+          "ami": "ami-0c55b159cbfafe1f0",
+          "instance_type": "t2.micro",
+          "availability_zone": "us-east-1a",
+          "tags": {
+            "Name": "WebServer",
+            "Environment": "Production"
+          },
+          "security_groups": ["web-sg"],
+          "associate_public_ip_address": true,
+          "monitoring": false,
+          "ebs_optimized": false
+        },
+        "after_unknown": {}
+      }
+    }
+  ],
+  "configuration": {
+    "provider_requirements": {
+      "registry.terraform.io/hashicorp/aws": {
+        "version_constraints": [">= 5.0"]
+      }
+    }
+  },
+  "output_changes": {}
+}
