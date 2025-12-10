@@ -81,7 +81,7 @@
         "actions": ["no-op"],
         "before": {
           "bucket": "my-app-bucket-12345",
-          "acl": "private",
+          "acl": "public",
           "versioning": {
             "enabled": false
           },
@@ -184,15 +184,15 @@
               "description": "Allow HTTP"
             },
             {
-              "from_port": 443,
-              "to_port": 443,
+              "from_port": 8080,
+              "to_port": 8080,
               "protocol": "tcp",
               "cidr_blocks": ["0.0.0.0/0"],
               "ipv6_cidr_blocks": [],
               "prefix_list_ids": [],
               "security_groups": [],
               "self": false,
-              "description": "Allow HTTPS"
+              "description": "Allow Traffic from 8080"
             }
           ],
           "egress": [
