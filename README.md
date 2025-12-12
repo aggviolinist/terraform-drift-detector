@@ -1,5 +1,5 @@
 # terraform-drift-detector
-Python code to detect drift detection on terraform state file
+Python script to detect drift detection on terraform state file
 ## Activate the Python Environment
 ```sh
 python3 -m venv venv
